@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:VPenExample"
+             xmlns:oxy="clr-namespace:OxyPlot.Xamarin.Forms;assembly=OxyPlot.Xamarin.Forms"
+             x:Class="VPenExample.MainPage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" Grid.Column="0" HorizontalOptions="End" Text="Time:" />
+            <Label Grid.Row="0" Grid.Column="1" HorizontalOptions="Start" FontAttributes="Bold" Text="{Binding Path=LastAdvertisind}" />
+
+            <Label Grid.Row="1" Grid.Column="0" HorizontalOptions="End" Text="Velocity:" />
+            <Label Grid.Row="1" Grid.Column="1" HorizontalOptions="Start" FontAttributes="Bold" Text="{Binding Path=Velocity}" />
+
+            <Label Grid.Row="2" Grid.Column="0" HorizontalOptions="End" Text="Acceleration:" />
+            <Label Grid.Row="2" Grid.Column="1" HorizontalOptions="Start" FontAttributes="Bold" Text="{Binding Path=Acceleration}" />
+
+            <Label Grid.Row="3" Grid.Column="0" HorizontalOptions="End" Text="Kurtosis:" />
+            <Label Grid.Row="3" Grid.Column="1" HorizontalOptions="Start" FontAttributes="Bold" Text="{Binding Path=Kurtosis}" />
+
+            <Label Grid.Row="4" Grid.Column="0" HorizontalOptions="End" Text="Temperature:" />
+            <Label Grid.Row="4" Grid.Column="1" HorizontalOptions="Start" FontAttributes="Bold" Text="{Binding Path=Temperature}" />
+
+        </Grid>
+        <StackLayout IsEnabled="{Binding Path=IsReady}" Grid.Row="1" >
+            <Button IsEnabled="{Binding Path=IsNotPolling}" Clicked="StartAndRead_Clicked" Text="Start and read waveform" />
+            <Button IsEnabled="{Binding Path=IsNotPolling}" Clicked="Poll_Clicked" Text="Poll" />
+            <Button IsEnabled="{Binding Path=IsPolling}"  Clicked="Stop_Clicked" Text="Stop" />
+        </StackLayout>
+        <Grid Grid.Row="2">
+            <oxy:PlotView x:Name="plot" />
+            <ActivityIndicator VerticalOptions="Center" HorizontalOptions="Center" IsRunning="{Binding Path=IsBusy}" IsVisible="{Binding Path=IsBusy}" />
+        </Grid>
+    </Grid>
+</ContentPage>
