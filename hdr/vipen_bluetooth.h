@@ -19,55 +19,55 @@
 #define ViPen_Bt_ID   (0x4F5C) // Magic number
 
 
-// Команда, Write:
-#define ViPen_Command_Start	0x0001 // Запустить измерение (зажать кнопку)
-#define ViPen_Command_Stop	0x0002 // Остановить измерение (отпустить кнопку)
-#define ViPen_Command_Off	0x0003 // Выключить прибор
-#define ViPen_Command_Idle	0x0004 // Чтобы прибор не выключался через 1 минуту, иногда будить его
+// РљРѕРјР°РЅРґР°, Write:
+#define ViPen_Command_Start	0x0001 // Р—Р°РїСѓСЃС‚РёС‚СЊ РёР·РјРµСЂРµРЅРёРµ (Р·Р°Р¶Р°С‚СЊ РєРЅРѕРїРєСѓ)
+#define ViPen_Command_Stop	0x0002 // РћСЃС‚Р°РЅРѕРІРёС‚СЊ РёР·РјРµСЂРµРЅРёРµ (РѕС‚РїСѓСЃС‚РёС‚СЊ РєРЅРѕРїРєСѓ)
+#define ViPen_Command_Off	0x0003 // Р’С‹РєР»СЋС‡РёС‚СЊ РїСЂРёР±РѕСЂ
+#define ViPen_Command_Idle	0x0004 // Р§С‚РѕР±С‹ РїСЂРёР±РѕСЂ РЅРµ РІС‹РєР»СЋС‡Р°Р»СЃСЏ С‡РµСЂРµР· 1 РјРёРЅСѓС‚Сѓ, РёРЅРѕРіРґР° Р±СѓРґРёС‚СЊ РµРіРѕ
 
 
-// Эти команды только для производителя. Пользователю их не показывать
-#define ViPen_Command_Calibration  	0x0010	// Вход в режим тест/калибровка без переключателя
-
-
-
-// Биты состояния, Read, Notify:
-#define ViPen_State_Stoped	(0<<0) // Прибор стоит
-#define ViPen_State_Started	(1<<0) // Прибор в режиме измерения (может быть с кнопки)
-#define ViPen_State_NoData	(0<<1) // Данных нет (после инициализации)
-#define ViPen_State_Data	(1<<1) // Есть данные
-
-
-#define ViPen_Get_Data_Vel  (0x0010) // запросить сигнал Канала Velocity
-#define ViPen_Get_Data_Acc	(0x0011) // запросить сигнал Канала Acceleration
+// Р­С‚Рё РєРѕРјР°РЅРґС‹ С‚РѕР»СЊРєРѕ РґР»СЏ РїСЂРѕРёР·РІРѕРґРёС‚РµР»СЏ. РџРѕР»СЊР·РѕРІР°С‚РµР»СЋ РёС… РЅРµ РїРѕРєР°Р·С‹РІР°С‚СЊ
+#define ViPen_Command_Calibration  	0x0010	// Р’С…РѕРґ РІ СЂРµР¶РёРј С‚РµСЃС‚/РєР°Р»РёР±СЂРѕРІРєР° Р±РµР· РїРµСЂРµРєР»СЋС‡Р°С‚РµР»СЏ
 
 
 
+// Р‘РёС‚С‹ СЃРѕСЃС‚РѕСЏРЅРёСЏ, Read, Notify:
+#define ViPen_State_Stoped	(0<<0) // РџСЂРёР±РѕСЂ СЃС‚РѕРёС‚
+#define ViPen_State_Started	(1<<0) // РџСЂРёР±РѕСЂ РІ СЂРµР¶РёРјРµ РёР·РјРµСЂРµРЅРёСЏ (РјРѕР¶РµС‚ Р±С‹С‚СЊ СЃ РєРЅРѕРїРєРё)
+#define ViPen_State_NoData	(0<<1) // Р”Р°РЅРЅС‹С… РЅРµС‚ (РїРѕСЃР»Рµ РёРЅРёС†РёР°Р»РёР·Р°С†РёРё)
+#define ViPen_State_Data	(1<<1) // Р•СЃС‚СЊ РґР°РЅРЅС‹Рµ
+
+
+#define ViPen_Get_Data_Vel  (0x0010) // Р·Р°РїСЂРѕСЃРёС‚СЊ СЃРёРіРЅР°Р» РљР°РЅР°Р»Р° Velocity
+#define ViPen_Get_Data_Acc	(0x0011) // Р·Р°РїСЂРѕСЃРёС‚СЊ СЃРёРіРЅР°Р» РљР°РЅР°Р»Р° Acceleration
 
 
 
 
 
-#pragma pack(1) // Все структуры упакованные 
+
+
+
+#pragma pack(1) // Р’СЃРµ СЃС‚СЂСѓРєС‚СѓСЂС‹ СѓРїР°РєРѕРІР°РЅРЅС‹Рµ 
 
 
 
 
-// Data Length Extension = Max 247 байт (не 27)
+// Data Length Extension = Max 247 Р±Р°Р№С‚ (РЅРµ 27)
 
-#define DATA_BLOCK_LEN (150) // длина блока данных
+#define DATA_BLOCK_LEN (150) // РґР»РёРЅР° Р±Р»РѕРєР° РґР°РЅРЅС‹С…
 
-#define STAMPS_IN_BLOCK ((DATA_BLOCK_LEN-2)/2) // 74 отсчёта в блоке
+#define STAMPS_IN_BLOCK ((DATA_BLOCK_LEN-2)/2) // 74 РѕС‚СЃС‡С‘С‚Р° РІ Р±Р»РѕРєРµ
 
 typedef __packed struct stWaveform_Header
 {
-    uint8_t ViPen_Get_Data_Command;	// Команда из п.5
-    uint8_t ViPen_Get_Data_Block; 	// Номер блока из п.5
-    uint8_t ViPen_Get_Wave_ID; 	// Счётчик, позволяет проверить, что качаем тот-же замер
-                                // Увеличивается на 1, при запросе заголовка
+    uint8_t ViPen_Get_Data_Command;	// РљРѕРјР°РЅРґР° РёР· Рї.5
+    uint8_t ViPen_Get_Data_Block; 	// РќРѕРјРµСЂ Р±Р»РѕРєР° РёР· Рї.5
+    uint8_t ViPen_Get_Wave_ID; 	// РЎС‡С‘С‚С‡РёРє, РїРѕР·РІРѕР»СЏРµС‚ РїСЂРѕРІРµСЂРёС‚СЊ, С‡С‚Рѕ РєР°С‡Р°РµРј С‚РѕС‚-Р¶Рµ Р·Р°РјРµСЂ
+                                // РЈРІРµР»РёС‡РёРІР°РµС‚СЃСЏ РЅР° 1, РїСЂРё Р·Р°РїСЂРѕСЃРµ Р·Р°РіРѕР»РѕРІРєР°
     uint8_t Reserv1;
-    uint32_t Timestamp;	//  Счётчик 1024 Гц, совпадает с User_Data. Timestamp
-    float Coeff;	// Коэф перевода данных sint16_t  в float, 4 байта
+    uint32_t Timestamp;	//  РЎС‡С‘С‚С‡РёРє 1024 Р“С†, СЃРѕРІРїР°РґР°РµС‚ СЃ User_Data. Timestamp
+    float Coeff;	// РљРѕСЌС„ РїРµСЂРµРІРѕРґР° РґР°РЅРЅС‹С… sint16_t  РІ float, 4 Р±Р°Р№С‚Р°
     uint16_t Reserv2[(DATA_BLOCK_LEN-12)/2];
 } TWaveform_Header;
 #define szTWaveform_Header sizeof(TWaveform_Header)
@@ -76,9 +76,9 @@ static_assert(szTWaveform_Header==DATA_BLOCK_LEN, "");
 
 typedef __packed struct stWaveform_Data
 {
-    uint8_t ViPen_Get_Data_Block; 	// Номер блока из п.5
-    uint8_t ViPen_Get_Wave_ID; 	// Счётчик, позволяет проверить, что качаем тот-же замер
-    int16_t Wave[STAMPS_IN_BLOCK];	// отсчёты = 2 байта знаковое *74 отсчёта в блоке
+    uint8_t ViPen_Get_Data_Block; 	// РќРѕРјРµСЂ Р±Р»РѕРєР° РёР· Рї.5
+    uint8_t ViPen_Get_Wave_ID; 	// РЎС‡С‘С‚С‡РёРє, РїРѕР·РІРѕР»СЏРµС‚ РїСЂРѕРІРµСЂРёС‚СЊ, С‡С‚Рѕ РєР°С‡Р°РµРј С‚РѕС‚-Р¶Рµ Р·Р°РјРµСЂ
+    int16_t Wave[STAMPS_IN_BLOCK];	// РѕС‚СЃС‡С‘С‚С‹ = 2 Р±Р°Р№С‚Р° Р·РЅР°РєРѕРІРѕРµ *74 РѕС‚СЃС‡С‘С‚Р° РІ Р±Р»РѕРєРµ
 } TWaveform_Data;
 #define szTWaveform_Data sizeof(TWaveform_Data)
 static_assert(szTWaveform_Data==DATA_BLOCK_LEN, "");
@@ -106,7 +106,7 @@ typedef __packed struct stAdvertisingData
     uint16_t ManID;
     uint8_t Addr;	// ==0
     uint16_t ID;	// const uint16_t ViPen_Bt_ID     = 0x4F5C; // Magic number
-    uint32_t TimeStamp;	// Счётчик 1024 Гц для проверки, что появились новые данные
+    uint32_t TimeStamp;	// РЎС‡С‘С‚С‡РёРє 1024 Р“С† РґР»СЏ РїСЂРѕРІРµСЂРєРё, С‡С‚Рѕ РїРѕСЏРІРёР»РёСЃСЊ РЅРѕРІС‹Рµ РґР°РЅРЅС‹Рµ
     int16_t Values[4];	// Velocity, Acceleration, Excess, Temperature
     
 } TAdvertisingData;
@@ -117,7 +117,7 @@ static_assert(szTAdvertisingData==29, "");
 
 
 
-// бекон
+// Р±РµРєРѕРЅ
 static TAdvertisingData AdvertisingData =
 {
     0x02, GAP_ADTYPE_FLAGS, GAP_ADTYPE_FLAGS_GENERAL | GAP_ADTYPE_FLAGS_BREDR_NOT_SUPPORTED,
