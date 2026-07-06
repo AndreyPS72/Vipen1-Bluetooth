@@ -109,10 +109,16 @@ typedef __packed struct stAdvertisingData
     uint32_t TimeStamp;	// Счётчик 1024 Гц для проверки, что появились новые данные
     int16_t Values[4];	// Velocity, Acceleration, Excess, Temperature
     
+    // Добавил в версии 3.21
+	uint8_t Battery;	// В битах 0..6 хранится состояние батареи в процентах 0..100 %
+						// Старший бит == 1 - прибор заряжается (зелёный светодиод)
+	uint8_t Firmware;	// Версии FW процессоров:
+						// Старшие 4 бита = 0 (резерв), младшие 4 бита = для SAMD21 
+
 } TAdvertisingData;
 #define szTAdvertisingData sizeof(TAdvertisingData)
 
-static_assert(szTAdvertisingData==29, "");
+static_assert(szTAdvertisingData==31, "");
 
 
 
@@ -122,8 +128,8 @@ static TAdvertisingData AdvertisingData =
 {
     0x02, GAP_ADTYPE_FLAGS, GAP_ADTYPE_FLAGS_GENERAL | GAP_ADTYPE_FLAGS_BREDR_NOT_SUPPORTED,
     0x06, GAP_ADTYPE_LOCAL_NAME_COMPLETE, 'V', 'i', 'P', 'e', 'n',
-    0x12, GAP_ADTYPE_MANUFACTURER_SPECIFIC, TI_COMPANY_ID, 
-        0x00, ViPen_Bt_ID, 0x00000000, 0, 0, -200, 0
+    0x14, GAP_ADTYPE_MANUFACTURER_SPECIFIC, TI_COMPANY_ID, 
+        0x00, ViPen_Bt_ID, 0x00000000, 0, 0, -200, 0, 0, 1
 };
 
 
